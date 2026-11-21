@@ -1,0 +1,20 @@
+# Output temporanei
+build/
+__pycache__/
+*.pyc
+# KiCad: backup, lock, autosave, cache, impostazioni locali della finestra
+*-backups/
+*.lck
+~*.lck
+_autosave-*
+fp-info-cache
+*.kicad_prl
+*.kicad_sch.bak
+# Simulazioni
+sim/*.raw
+sim/**/*.raw
+# Sistema
+.DS_Store
+# I PDF dei datasheet e production/ si versionano.
+# Cartella di lavoro di kicad-happy (se lanciato senza --analysis-dir)
+analysis/

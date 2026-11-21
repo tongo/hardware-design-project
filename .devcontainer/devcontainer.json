@@ -1,0 +1,51 @@
+{
+  "name": "KiCad HW devenv (KiCad 10.0.8)",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      // L'immagine ufficiale kicad/kicad:10.0.8 esiste solo per amd64: si parte da Ubuntu 24.04 + PPA KiCad 10.0 (build arm64).
+      "UBUNTU_IMAGE": "ubuntu:24.04",
+      // Versione esatta dell'app KiCad sul Mac. La build fallisce se il PPA ha una versione diversa
+      // (in quel caso aggiornare prima l'app sul Mac, poi questo valore).
+      "KICAD_VERSION": "10.0.8",
+      // Freerouting 2.5.x richiede Java 25 (openjdk-25-jre-headless da noble-updates).
+      "FREEROUTING_VERSION": "2.5.0",
+      "KICAD_HAPPY_REF": "v3.0.2",
+      // Modelli 3D per i render (circa 6 GB in più nell'immagine). "true" per abilitarli.
+      "INSTALL_3D_MODELS": "false"
+    }
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": { "version": "22" },
+    "ghcr.io/anthropics/devcontainer-features/claude-code:1": {}
+  },
+  "overrideFeatureInstallOrder": [
+    "ghcr.io/devcontainers/features/node",
+    "ghcr.io/anthropics/devcontainer-features/claude-code"
+  ],
+  "remoteUser": "kicad",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=delegated",
+  "workspaceFolder": "/workspace",
+  "runArgs": ["--cap-add=NET_ADMIN", "--cap-add=NET_RAW"],
+  "mounts": [
+    "source=claude-code-config-${devcontainerId},target=/home/kicad/.claude,type=volume",
+    "source=hw-jlcparts-db,target=/data/jlcparts,type=volume",
+    "source=hw-history-${devcontainerId},target=/commandhistory,type=volume"
+  ],
+  "containerEnv": {
+    "CLAUDE_CONFIG_DIR": "/home/kicad/.claude",
+    // Il firewall blocca gli aggiornamenti automatici: Claude Code si aggiorna con "Rebuild Container".
+    "DISABLE_AUTOUPDATER": "1",
+    "JLC_DB_DIR": "/data/jlcparts",
+    "FREEROUTING_JAR": "/opt/freerouting.jar",
+    "KICAD_HAPPY_DIR": "/opt/kicad-happy",
+    "HISTFILE": "/commandhistory/.bash_history",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
+  "postStartCommand": "sudo /usr/local/bin/hw-init-firewall.sh",
+  "waitFor": "postStartCommand",
+  "customizations": {
+    "vscode": { "extensions": ["anthropic.claude-code", "ms-python.python", "timonwong.shellcheck"] }
+  }
+}

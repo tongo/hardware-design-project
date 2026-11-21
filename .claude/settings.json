@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(kicad-cli:*)",
+      "Bash(tools/*)",
+      "Bash(python3:*)",
+      "Bash(ngspice:*)",
+      "Bash(pdftotext:*)",
+      "Bash(pdftoppm:*)",
+      "Bash(pdfinfo:*)",
+      "Bash(sqlite3:*)",
+      "Bash(rg:*)",
+      "Bash(jq:*)",
+      "Bash(ls:*)",
+      "Bash(mkdir:*)",
+      "Bash(cp rules/*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git tag:*)",
+      "Bash(java -jar /opt/freerouting.jar:*)"
+    ],
+    "deny": [
+      "Bash(sudo:*)",
+      "Bash(fw-allow:*)",
+      "Bash(/usr/local/bin/fw-allow:*)",
+      "Bash(/usr/local/bin/hw-init-firewall.sh:*)",
+      "Bash(iptables:*)",
+      "Bash(ipset:*)",
+      "Bash(git push:*)",
+      "Read(**/*.kicad_pcb)",
+      "Read(**/*-backups/**)",
+      "Read(**/production/**/*.zip)",
+      "Read(**/*.gbr)",
+      "Read(**/*.drl)"
+    ]
+  }
+}

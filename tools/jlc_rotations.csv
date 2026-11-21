@@ -1,0 +1,23 @@
+pattern,correzione_gradi
+# Correzioni di rotazione per la CPL di JLCPCB: regex sul nome del footprint (senza libreria), gradi da AGGIUNGERE.
+# Le righe che iniziano con '#' sono SOLO CANDIDATI (valori ricorrenti nella comunità KiCad/JLC), non attive.
+# Per attivarne una: controllala nell'anteprima di posizionamento di JLC, togli '#' e annota qui sotto
+# data, ordine e componente usato per la prova. Vale la prima regola che corrisponde.
+#
+# Esempio di registrazione:  ^SOT-23,180   # confermata 2026-12-01, ordine Y123, U2 (AO3401A, C15127)
+#
+#^SOT-23,180
+#^SOT-223,180
+#^SOT-89,180
+#^SOIC-,270
+#^SO-,270
+#^TSSOP-,270
+#^MSOP-,270
+#^QFN-,270
+#^LQFP-,270
+#^ESP32-WROOM,270
+#^USB_C_Receptacle,180
+#^D_SOD-123,180
+#^SMA,180
+#^SMB,180
+#^CP_Elec_,180

@@ -1,0 +1,52 @@
+(version 1)
+# Regole JLCPCB, 4 layer, FR-4, rame 1 oz. Valori PIÙ PRUDENTI dei minimi JLC.
+# Fonte: https://jlcpcb.com/capabilities/pcb-capabilities (verificata il 2026-11-21).
+# Minimi JLC di allora tra parentesi. Copiare in hardware/<nome>/<nome>.kicad_dru.
+
+# Piste e isolamento (JLC multilayer: 0.09 / 0.09 mm)
+(rule "Larghezza pista minima"
+  (constraint track_width (min 0.127mm)))
+(rule "Isolamento minimo"
+  (constraint clearance (min 0.127mm)))
+
+# Via (JLC: foro 0.15 mm, consigliato >= 0.2 mm; diametro >= foro + 0.1 mm; sotto 0.45 mm di diametro costa di più)
+(rule "Diametro via"
+  (condition "A.Type == 'Via'")
+  (constraint via_diameter (min 0.5mm)))
+(rule "Foro via"
+  (condition "A.Type == 'Via'")
+  (constraint hole_size (min 0.3mm)))
+(rule "Anello rame via"
+  (condition "A.Type == 'Via'")
+  (constraint annular_width (min 0.1mm)))
+
+# Fori dei componenti (JLC: anello PTH multilayer consigliato 0.20 mm, minimo 0.15 mm; NPTH >= 0.5 mm)
+(rule "Anello rame PTH"
+  (condition "A.Type == 'Pad' && A.isPlated()")
+  (constraint annular_width (min 0.2mm)))
+(rule "Foro PTH"
+  (condition "A.Type == 'Pad' && A.isPlated()")
+  (constraint hole_size (min 0.3mm)))
+(rule "Foro NPTH"
+  (condition "A.Type == 'Pad' && !A.isPlated()")
+  (constraint hole_size (min 0.5mm)))
+
+# Distanze (JLC: foro-foro via 0.2 mm / pad 0.45 mm; rame-bordo fresato 0.2 mm)
+(rule "Distanza tra fori"
+  (constraint hole_to_hole (min 0.5mm)))
+(rule "Distanza dal bordo"
+  (constraint edge_clearance (min 0.3mm)))
+
+# Serigrafia (JLC: testo alto >= 1.0 mm, tratto >= 0.15 mm, distanza dai pad 0.15 mm).
+# La serigrafia sopra i pad viene già tagliata da --subtract-soldermask in jlc_export.py.
+(rule "Testo serigrafia"
+  (layer "F.SilkS")
+  (constraint text_height (min 1.0mm))
+  (constraint text_thickness (min 0.15mm)))
+(rule "Testo serigrafia retro"
+  (layer "B.SilkS")
+  (constraint text_height (min 1.0mm))
+  (constraint text_thickness (min 0.15mm)))
+(rule "Distanza tra serigrafie"
+  (condition "A.Layer == '?.Silkscreen' && B.Layer == '?.Silkscreen'")
+  (constraint silk_clearance (min 0.15mm)))

@@ -1,0 +1,63 @@
+# Domini consentiti in uscita dal container (uno per riga, '#' per i commenti).
+# Gli intervalli IP di GitHub (web, api, git) si aggiungono automaticamente da https://api.github.com/meta.
+# Per aggiungere un dominio in modo permanente: inserirlo qui e fare "Rebuild Container".
+# Per consentirlo solo fino al prossimo riavvio: dal terminale, `sudo fw-allow <dominio>`.
+
+# Claude Code (API, login, telemetria/errori)
+api.anthropic.com
+statsig.anthropic.com
+statsig.com
+sentry.io
+claude.ai
+console.anthropic.com
+platform.claude.com
+# VS Code
+marketplace.visualstudio.com
+vscode.blob.core.windows.net
+update.code.visualstudio.com
+# Registri di pacchetti
+registry.npmjs.org
+pypi.org
+files.pythonhosted.org
+# GitHub
+github.com
+api.github.com
+raw.githubusercontent.com
+objects.githubusercontent.com
+codeload.github.com
+release-assets.githubusercontent.com
+# Database componenti JLC
+cdfer.github.io
+yaqwsx.github.io
+# JLCPCB / LCSC / EasyEDA
+jlcpcb.com
+www.jlcpcb.com
+lcsc.com
+www.lcsc.com
+wmsc.lcsc.com
+datasheet.lcsc.com
+easyeda.com
+modules.easyeda.com
+# KiCad
+kicad.org
+www.kicad.org
+docs.kicad.org
+gitlab.com
+# Produttori (datasheet e stato del ciclo di vita)
+www.ti.com
+www.st.com
+www.nxp.com
+www.microchip.com
+ww1.microchip.com
+www.analog.com
+www.onsemi.com
+www.infineon.com
+www.espressif.com
+documentation.espressif.com
+docs.espressif.com
+www.diodes.com
+www.vishay.com
+www.nexperia.com
+assets.nexperia.com
+fscdn.rohm.com
+www.monolithicpower.com
